@@ -22,7 +22,7 @@ const Login = () => {
         <FloatingLabel controlId="floatingPassword" label="Senha">
           <Form.Control type="password" placeholder="Password" />
         </FloatingLabel>
-        <Button variant="secondary" className="mt-4" size="lg">
+        <Button variant="secondary" className="mt-4" size="lg" href="/home">
           Entrar
         </Button>
       </Container>
