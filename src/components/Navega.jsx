@@ -5,7 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 const Navega = () => {
   return (
     <div>
-      <Navbar expand="lg" bg="secondary" data-bs-theme="light">
+      <Navbar expand="lg" className="bg-dark-subtle" data-bs-theme="light">
         <Container>
           <span
             className="material-symbols-outlined"
