@@ -9,24 +9,27 @@ import Image from "react-bootstrap/Image";
 
 import Navega from "../components/Navega";
 
-const CadastroProdut = () => {
-  const cates = [
-    { id: 1, nome: "Eletrônicos" },
-    { id: 2, nome: "Moda e Vestuario" },
-    { id: 3, nome: "Alimentos e Bebidas" },
-    { id: 4, nome: "Saude e Beleza" },
-    { id: 5, nome: "Esportes e Lazer" },
-    { id: 6, nome: "Brinquedos e Jogos" },
-    { id: 7, nome: "Livros e Papelaria" },
-  ];
 
-  const linkImagem = "https://marsangomateriais.com.br/wp-content/uploads/2020/11/fundo-sem-imagem.png"
 
+
+const EditarProdut = () => {
+        const cates = [
+          { id: 1, nome: "Eletrônicos" },
+          { id: 2, nome: "Moda e Vestuario" },
+          { id: 3, nome: "Alimentos e Bebidas" },
+          { id: 4, nome: "Saude e Beleza" },
+          { id: 5, nome: "Esportes e Lazer" },
+          { id: 6, nome: "Brinquedos e Jogos" },
+          { id: 7, nome: "Livros e Papelaria" },
+        ];
+      
+        const linkImagem = "https://marsangomateriais.com.br/wp-content/uploads/2020/11/fundo-sem-imagem.png"
+      
   return (
     <div>
       <Navega />
       <Container>
-        <h1>Registro de Produtos</h1>
+        <h1>Editar Produtos</h1>
         <form className="mt-3">
           <Row>
             <Col xs={6}>
@@ -99,14 +102,14 @@ const CadastroProdut = () => {
             </Alert>
           
                   <Button variant="success" size="lg" type="submit">
-                  cadastrar
+                  editar
                   </Button>
 
           
         </form>
       </Container>
     </div>
-  );
-};
+  )
+}
 
-export default CadastroProdut;
+export default EditarProdut

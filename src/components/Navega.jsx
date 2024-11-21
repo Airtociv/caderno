@@ -21,7 +21,7 @@ const Navega = () => {
               <Nav.Link href="/home" className="active">
                 Produtos
               </Nav.Link>
-              <Nav.Link href="/cadastro">Cadastro</Nav.Link>
+              <Nav.Link href="/produto/cadastrar">Cadastro</Nav.Link>
             </Nav>
             {/* sair */}
             <Nav className="justify-content-end">

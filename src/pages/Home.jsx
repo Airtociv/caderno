@@ -1,6 +1,8 @@
 import React from "react";
 import CardProduto from "../components/CardProduto";
 import { Container } from "react-bootstrap";
+import Navega from "../components/Navega";
+
 
 const Home = () => {
   const produtos = [
@@ -9,7 +11,7 @@ const Home = () => {
       nome: "Shampoo",
       descricao: "shampoo generico e barato",
       preco: 5.55,
-      categoria: "higiene",
+      categoria: "Saude e Beleza",
       imagemUrl:
         "https://th.bing.com/th/id/OIP._ZMa_DQAUWiEIjvCgAwsmAHaHa?rs=1&pid=ImgDetMain",
     },
@@ -35,6 +37,7 @@ const Home = () => {
 
   return (
     <div>
+        <Navega />
       <h1> Lista de Produtos </h1>
       <Container>
       <div className="lista-produtos d-flex col-12 gap-2 mt-3 justify-content-center flex-wrap">
