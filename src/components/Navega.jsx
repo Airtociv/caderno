@@ -3,6 +3,8 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
 const Navega = () => {
+  const usuarioNome = localStorage.getItem("userName");
+
   return (
     <div>
       <Navbar expand="lg" className="bg-dark-subtle" data-bs-theme="light">
@@ -25,7 +27,12 @@ const Navega = () => {
             </Nav>
             {/* sair */}
             <Nav className="justify-content-end">
-              <Nav.Link href="/login">Sair</Nav.Link>
+              <Navbar.Text style={{ color: "black" }}>
+                [{usuarioNome}]
+              </Navbar.Text>
+              <Nav.Link href="/login">
+                <span class="material-symbols-outlined">logout</span>
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
