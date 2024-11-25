@@ -4,10 +4,12 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { Alert } from "react-bootstrap";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { useNavigate } from 'react-router-dom';
 
+
+const url = "http://localhost:5000/usuarios"
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -17,10 +19,24 @@ const Login = () => {
   const [alertMensagem, setAlertMensagem] = useState("");
   const [alertVariant, setAlertVariant] = useState("danger");
 
-  const susus = [
-    { id: 1, nome: "Tiara", email: "arait@placeholder.net", senha: "25" },
-    { id: 2, nome: "Marcelo", email: "olecram@placeholder.net", senha: "83" },
-  ];
+  const [susus,setSusus] = useState([])
+
+  useEffect(()=>{
+    async function fetchData() {
+      try{
+        const req = await fetch(url)
+        const users = await req.json()
+        console.log(users)
+        setSusus(users)
+        
+      }
+      catch(erro){
+        console.log(erro.message);
+        
+      }
+    }
+    fetchData()
+  },[])
 
 const navigate = useNavigate()
 

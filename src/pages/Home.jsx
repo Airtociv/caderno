@@ -3,37 +3,33 @@ import CardProduto from "../components/CardProduto";
 import { Container } from "react-bootstrap";
 import Navega from "../components/Navega";
 
+import { useState, useEffect } from "react";
+
+
+const url = "http://localhost:5000/produtos"
 
 const Home = () => {
-  const produtos = [
-    {
-      id: 1,
-      nome: "Shampoo",
-      descricao: "shampoo generico e barato",
-      preco: 5.55,
-      categoria: "Saude e Beleza",
-      imagemUrl:
-        "https://th.bing.com/th/id/OIP._ZMa_DQAUWiEIjvCgAwsmAHaHa?rs=1&pid=ImgDetMain",
-    },
-    {
-      id: 2,
-      nome: "Arroz",
-      descricao: "Arroz Branco popular",
-      preco: 12.35,
-      categoria: "mercearia",
-      imagemUrl:
-        "https://th.bing.com/th/id/OIP.WrFqH7szc985H7u9zNel5AHaHa?rs=1&pid=ImgDetMain",
-    },
-    {
-      id: 3,
-      nome: "Frango Congelado",
-      descricao: "Frango desossado congelado",
-      preco: 8.95,
-      categoria: "açougue",
-      imagemUrl:
-        "https://th.bing.com/th/id/OIP.axXqAiyKADlGezfKEfrM8QHaHa?w=1000&h=1000&rs=1&pid=ImgDetMain",
-    },
-  ];
+  const [produtos,setProdutos] = useState([]);
+
+  useEffect(()=>{
+    async function fetchData() {
+      try{
+        const req = await fetch(url)
+        const prods = await req.json()
+        console.log(prods)
+        setProdutos(prods)
+        
+      }
+      catch(erro){
+        console.log(erro.message);
+        
+      }
+    }
+    fetchData()
+  },[])
+
+
+
 
   return (
     <div>

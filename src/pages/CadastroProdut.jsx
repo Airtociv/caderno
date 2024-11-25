@@ -9,20 +9,15 @@ import Image from "react-bootstrap/Image";
 
 import Navega from "../components/Navega";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
 
+
+const url ="http://localhost:5000/categorias";
+
 const CadastroProdut = () => {
-  const cates = [
-    { id: 1, nome: "Eletrônicos" },
-    { id: 2, nome: "Moda e Vestuario" },
-    { id: 3, nome: "Alimentos e Bebidas" },
-    { id: 4, nome: "Saude e Beleza" },
-    { id: 5, nome: "Esportes e Lazer" },
-    { id: 6, nome: "Brinquedos e Jogos" },
-    { id: 7, nome: "Livros e Papelaria" },
-  ];
+  const [cates,setCates] = useState([]);
 
   const [alertClass, setAlertClass] = useState("mb-3 d-none");
   const [alertMensagem, setAlertMensagem] = useState("");
@@ -36,6 +31,26 @@ const CadastroProdut = () => {
   const [categoria, setCategoria] = useState("");
   const [preco, setPreco] = useState("");
   const [imagem, setImagem] = useState("");
+
+ 
+
+  useEffect(()=>{
+    async function fetchData() {
+      try{
+        const req = await fetch(url)
+        const categos = await req.json()
+        console.log(categos)
+        setCates(categos)
+        
+      }
+      catch(erro){
+        console.log(erro.message);
+        
+      }
+    }
+    fetchData()
+  },[])
+
 
   const navigate = useNavigate();
 

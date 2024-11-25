@@ -7,24 +7,36 @@ import Row from "react-bootstrap/Row";
 import Alert from "react-bootstrap/Alert";
 import Image from "react-bootstrap/Image";
 
+import { useState, useEffect } from "react";
+
 import Navega from "../components/Navega";
 
 
-
+const url ="http://localhost:5000/categorias";
 
 const EditarProdut = () => {
-        const cates = [
-          { id: 1, nome: "Eletrônicos" },
-          { id: 2, nome: "Moda e Vestuario" },
-          { id: 3, nome: "Alimentos e Bebidas" },
-          { id: 4, nome: "Saude e Beleza" },
-          { id: 5, nome: "Esportes e Lazer" },
-          { id: 6, nome: "Brinquedos e Jogos" },
-          { id: 7, nome: "Livros e Papelaria" },
-        ];
+ const [cates,setCates] = useState([]);
       
         const linkImagem = "https://marsangomateriais.com.br/wp-content/uploads/2020/11/fundo-sem-imagem.png"
       
+        useEffect(()=>{
+          async function fetchData() {
+            try{
+              const req = await fetch(url)
+              const categos = await req.json()
+              console.log(categos)
+              setCates(categos)
+              
+            }
+            catch(erro){
+              console.log(erro.message);
+              
+            }
+          }
+          fetchData()
+        },[])
+
+
   return (
     <div>
       <Navega />
