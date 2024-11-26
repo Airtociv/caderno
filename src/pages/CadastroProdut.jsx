@@ -14,7 +14,9 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 
-const url ="http://localhost:5000/categorias";
+const urlcates ="http://localhost:5000/categorias";
+const urlfile ="http://localhost:5000/produtos";
+
 
 const CadastroProdut = () => {
   const [cates,setCates] = useState([]);
@@ -28,16 +30,16 @@ const CadastroProdut = () => {
 
   const [nome, setNome] = useState("");
   const [descricao, setDescricao] = useState("");
-  const [categoria, setCategoria] = useState("");
+  const [categoria, setCategoria] = useState("Eletrônicos");
   const [preco, setPreco] = useState("");
-  const [imagem, setImagem] = useState("");
+  const [imagemUrl, setImagemUrl] = useState("");
 
  
 
   useEffect(()=>{
     async function fetchData() {
       try{
-        const req = await fetch(url)
+        const req = await fetch(urlcates)
         const categos = await req.json()
         console.log(categos)
         setCates(categos)
@@ -60,13 +62,31 @@ const CadastroProdut = () => {
     if (nome != "") {
       if (descricao != "") {
         if (preco != "") {
-          const produto = { nome, descricao, categoria, preco, imagem };
+           
+          const produto = { nome, descricao, categoria, preco, imagemUrl };
           console.log(produto);
-          setAlertClass("mb-3 mt-2");
-          setAlertVariant("success");
-          setAlertMensagem("Produto cadastrado com sucesso");
-          alert("Produto cadastrado com sucesso");
-          navigate("/home");
+          try {
+            
+            const req = await fetch(urlfile,{
+              method: "POST",
+              headers:{"Content-type": "application/json"},
+              body: JSON.stringify(produto) 
+            })
+
+            const res = req.json()
+            console.log(res);
+            setAlertClass("mb-3 mt-2");
+            setAlertVariant("success");
+            setAlertMensagem("Produto cadastrado com sucesso");
+            alert("Produto cadastrado com sucesso");
+            
+            
+          } catch (error) {
+            console.log(error);
+            
+          }
+         
+          
         } else {
           setAlertClass("mb-3 mt-2");
           setAlertMensagem("O campo preço não pode ficar vazio");
@@ -120,12 +140,12 @@ const CadastroProdut = () => {
 
               <Form.Group controlId="formGridTipo" className="mb-3">
                 <Form.Label>Setor</Form.Label>
-                <Form.Select>
+                <Form.Select
                   value={categoria}
                   onChange=
                   {(e) => {
                     setCategoria(e.target.value);
-                  }}
+                  }}>
                   {cates.map((cate) => (
                     <option key={cate.id} value={cate.nome}>
                       {cate.nome}
@@ -159,15 +179,15 @@ const CadastroProdut = () => {
                   <Form.Control
                     type="text"
                     placeholder="envie um link de imagem para o produto"
-                    value={imagem}
+                    value={imagemUrl}
                     onChange={(e) => {
-                      setImagem(e.target.value);
+                      setImagemUrl(e.target.value);
                     }}
                   />
                 </FloatingLabel>
 
                 <Image
-                  src={imagem == "" ? linkImagem : imagem}
+                  src={imagemUrl == "" ? linkImagem : imagemUrl}
                   rounded
                   width={300}
                   height={300}

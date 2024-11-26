@@ -26,7 +26,7 @@ const Home = () => {
       }
     }
     fetchData()
-  },[])
+  },[produtos])
 
 
 

@@ -1,27 +1,27 @@
 {
   "usuarios": [
     {
-      "id": 1,
+      "id": "1",
       "nome": "Tiara",
       "email": "arait@placeholder.net",
       "senha": "25"
     },
     {
-      "id": 2,
+      "id": "2",
       "nome": "Marcelo",
       "email": "olecram@placeholder.net",
       "senha": "83"
     },
     {
-      "id": 3,
-      "nome": "Antonio",
-      "email": "oinotna@placeholder.net",
-      "senha": "33"
+      "id": "4",
+      "nome": "Naiara",
+      "email": "araian@placeholder.net",
+      "senha": "19"
     }
   ],
   "produtos": [
     {
-      "id": 1,
+      "id": "1",
       "nome": "Shampoo",
       "descricao": "shampoo generico e barato",
       "preco": 5.55,
@@ -29,7 +29,7 @@
       "imagemUrl": "https://th.bing.com/th/id/OIP._ZMa_DQAUWiEIjvCgAwsmAHaHa?rs=1&pid=ImgDetMain"
     },
     {
-      "id": 2,
+      "id": "2",
       "nome": "Arroz",
       "descricao": "Arroz Branco popular",
       "preco": 12.35,
@@ -37,22 +37,50 @@
       "imagemUrl": "https://th.bing.com/th/id/OIP.WrFqH7szc985H7u9zNel5AHaHa?rs=1&pid=ImgDetMain"
     },
     {
-      "id": 3,
+      "id": "3",
       "nome": "Frango Congelado",
       "descricao": "Frango desossado congelado",
       "preco": 8.95,
       "categoria": "açougue",
       "imagemUrl": "https://th.bing.com/th/id/OIP.axXqAiyKADlGezfKEfrM8QHaHa?w=1000&h=1000&rs=1&pid=ImgDetMain"
+    },
+    {
+      "id": "7244",
+      "nome": "cenoura",
+      "descricao": "vegetal",
+      "categoria": "Alimentos e Bebidas",
+      "preco": "7",
+      "imagemUrl": "https://mercadoorganico.com/6443-large_default/cenoura-organica-500g-osm.jpg"
     }
   ],
-
   "categorias": [
-    { "id": 1, "nome": "Eletrônicos" },
-    { "id": 2, "nome": "Moda e Vestuario" },
-    { "id": 3, "nome": "Alimentos e Bebidas" },
-    { "id": 4, "nome": "Saude e Beleza" },
-    { "id": 5, "nome": "Esportes e Lazer" },
-    { "id": 6, "nome": "Brinquedos e Jogos" },
-    { "id": 7, "nome": "Livros e Papelaria" }
+    {
+      "id": "1",
+      "nome": "Eletrônicos"
+    },
+    {
+      "id": "2",
+      "nome": "Moda e Vestuario"
+    },
+    {
+      "id": "3",
+      "nome": "Alimentos e Bebidas"
+    },
+    {
+      "id": "4",
+      "nome": "Saude e Beleza"
+    },
+    {
+      "id": "5",
+      "nome": "Esportes e Lazer"
+    },
+    {
+      "id": "6",
+      "nome": "Brinquedos e Jogos"
+    },
+    {
+      "id": "7",
+      "nome": "Livros e Papelaria"
+    }
   ]
 }
