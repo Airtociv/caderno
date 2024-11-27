@@ -12,7 +12,8 @@ import { useState, useEffect } from "react";
 import Navega from "../components/Navega";
 
 
-const url ="http://localhost:5000/categorias";
+const urlcates = "http://localhost:5000/categorias";
+
 
 const EditarProdut = () => {
  const [cates,setCates] = useState([]);
@@ -22,7 +23,7 @@ const EditarProdut = () => {
         useEffect(()=>{
           async function fetchData() {
             try{
-              const req = await fetch(url)
+              const req = await fetch(urlcates)
               const categos = await req.json()
               console.log(categos)
               setCates(categos)
@@ -36,13 +37,95 @@ const EditarProdut = () => {
           fetchData()
         },[])
 
+        const [alertClass, setAlertClass] = useState("mb-3 d-none");
+        const [alertMensagem, setAlertMensagem] = useState("");
+        const [alertVariant, setAlertVariant] = useState("danger");
+
+        const [nome, setNome] = useState("");
+        const [descricao, setDescricao] = useState("");
+        const [categoria, setCategoria] = useState("Eletrônicos");
+        const [preco, setPreco] = useState("");
+        const [imagemUrl, setImagemUrl] = useState("");
+
+
+        // const navigate = useNavigate();
+
+        const params = window.location.pathname.split("/")
+
+        const idProd = params[params.length-1]
+
+        useEffect (()=>{
+          async function fetchData() {
+            try{
+              const req = await fetch(`http://localhost:5000/produtos/${idProd}`)
+              const prod = await req.json()
+              console.log(prod);
+              setNome(prod.nome)
+              setDescricao(prod.descricao)
+              setCategoria(prod.categoria)
+              setPreco(prod.preco)
+              setImagemUrl(prod.imagemUrl == "" ? "":prod.imagemUrl)
+            }
+            catch(error){
+              console.log(error.message);
+              
+            }
+          }
+          fetchData()
+        })
+
+
+        const handleSubmit = async (e) => {
+          e.preventDefault();
+      
+          if (nome != "") {
+            if (descricao != "") {
+              if (preco != "") {
+                 
+                const produto = { nome, descricao, categoria, preco, imagemUrl };
+                console.log(produto);
+                try {
+                  
+                  const req = await fetch(`http://localhost:5000/produtos/${idProd}`,{
+                    method: "PUT",
+                    headers:{"Content-type": "application/json"},
+                    body: JSON.stringify(produto) 
+                  })
+      
+                  const res = req.json()
+                  console.log(res);
+                  setAlertClass("mb-3 mt-2");
+                  setAlertVariant("success");
+                  setAlertMensagem("Produto cadastrado com sucesso");
+                  alert("Produto cadastrado com sucesso");
+                  
+                  
+                } catch (error) {
+                  console.log(error);
+                  
+                }
+               
+                
+              } else {
+                setAlertClass("mb-3 mt-2");
+                setAlertMensagem("O campo preço não pode ficar vazio");
+              }
+            } else {
+              setAlertClass("mb-3 mt-2");
+              setAlertMensagem("O campo descrição não pode ficar vazio");
+            }
+          } else {
+            setAlertClass("mb-3 mt-2");
+            setAlertMensagem("O campo nome não pode ficar vazio");
+          }
+        };
 
   return (
     <div>
       <Navega />
       <Container>
         <h1>Editar Produtos</h1>
-        <form className="mt-3">
+        <form className="mt-3" onSubmit={handleSubmit}>
           <Row>
             <Col xs={6}>
               <FloatingLabel
@@ -53,6 +136,10 @@ const EditarProdut = () => {
                 <Form.Control
                   type="text"
                   placeholder="digite o nome do produto "
+                  value={nome}
+                  onChange={(e) => {
+                    setNome(e.target.value);
+                  }}
                 />
               </FloatingLabel>
               <FloatingLabel
@@ -63,12 +150,21 @@ const EditarProdut = () => {
                 <Form.Control
                   type="text"
                   placeholder="digite a descrição do produto"
+                  value={descricao}
+                  onChange={(e) => {
+                    setDescricao(e.target.value);
+                  }}
                 />
               </FloatingLabel>
 
               <Form.Group controlId="formGridTipo" className="mb-3">
                 <Form.Label>Setor</Form.Label>
-                <Form.Select>
+                <Form.Select
+                  value={categoria}
+                  onChange=
+                  {(e) => {
+                    setCategoria(e.target.value);
+                  }}>
                   {cates.map((cate) => (
                     <option key={cate.id} value={cate.nome}>
                       {cate.nome}
@@ -85,39 +181,47 @@ const EditarProdut = () => {
                   type="number"
                   step="0.01"
                   placeholder="digite o preço do produto"
+                  value={preco}
+                  onChange={(e) => {
+                    setPreco(e.target.value);
+                  }}
                 />
               </FloatingLabel>
-
             </Col>
             <Col xs={6}>
+              <Form.Group controlId="formFileLg" className="mb-3">
+                <FloatingLabel
+                  controlId="floatingInputImagem"
+                  label="envie um link de imagem para o produto"
+                  className="mb-3"
+                >
+                  <Form.Control
+                    type="text"
+                    placeholder="envie um link de imagem para o produto"
+                    value={imagemUrl}
+                    onChange={(e) => {
+                      setImagemUrl(e.target.value);
+                    }}
+                  />
+                </FloatingLabel>
 
-            <Form.Group controlId="formFileLg" className="mb-3">
-            <FloatingLabel
-                controlId="floatingInputImagem"
-                label="envie um link de imagem para o produto"
-                className="mb-3"
-              >
-                <Form.Control
-                  type="text"
-                  placeholder="envie um link de imagem para o produto"
+                <Image
+                  src={imagemUrl == "" ? linkImagem : imagemUrl}
+                  rounded
+                  width={300}
+                  height={300}
                 />
-              </FloatingLabel>
-              
-              <Image src={linkImagem} rounded width={300} height={300}/>
               </Form.Group>
-
             </Col>
           </Row>
 
-            <Alert variant="danger" >
-                  pagina com erro
-            </Alert>
-          
-                  <Button variant="success" size="lg" type="submit">
-                  editar
-                  </Button>
+          <Alert variant={alertVariant} className={alertClass}>
+            {alertMensagem}
+          </Alert>
 
-          
+          <Button variant="success" size="lg" type="submit">
+            cadastrar
+          </Button>
         </form>
       </Container>
     </div>
