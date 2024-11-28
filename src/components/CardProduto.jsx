@@ -38,8 +38,8 @@ const handleDelete = async(e)=>{
             <b>Categoria: </b> <br></br> {props.categoria}
           </CardText>
 
-          <CardLink href="/home">
-            <Button variant="warning">editar</Button>
+          <CardLink href= {`/produto/editar/${props.id}`}>
+            <Button variant="warning" >editar</Button>
           </CardLink>
 
           <CardLink >
