@@ -9,6 +9,8 @@ import Image from "react-bootstrap/Image";
 
 import { useState, useEffect } from "react";
 
+import { useNavigate } from "react-router-dom";
+
 import Navega from "../components/Navega";
 
 
@@ -48,7 +50,7 @@ const EditarProdut = () => {
         const [imagemUrl, setImagemUrl] = useState("");
 
 
-        // const navigate = useNavigate();
+         const navigate = useNavigate();
 
         const params = window.location.pathname.split("/")
 
@@ -72,7 +74,7 @@ const EditarProdut = () => {
             }
           }
           fetchData()
-        })
+        },[])
 
 
         const handleSubmit = async (e) => {
@@ -96,9 +98,9 @@ const EditarProdut = () => {
                   console.log(res);
                   setAlertClass("mb-3 mt-2");
                   setAlertVariant("success");
-                  setAlertMensagem("Produto cadastrado com sucesso");
-                  alert("Produto cadastrado com sucesso");
-                  
+                  setAlertMensagem("Produto editado com sucesso");
+                  alert("Produto editado com sucesso");
+                  navigate("/home")
                   
                 } catch (error) {
                   console.log(error);
@@ -220,7 +222,7 @@ const EditarProdut = () => {
           </Alert>
 
           <Button variant="success" size="lg" type="submit">
-            cadastrar
+            salvar alteração
           </Button>
         </form>
       </Container>

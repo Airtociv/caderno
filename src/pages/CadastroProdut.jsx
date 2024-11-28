@@ -79,7 +79,7 @@ const CadastroProdut = () => {
             setAlertVariant("success");
             setAlertMensagem("Produto cadastrado com sucesso");
             alert("Produto cadastrado com sucesso");
-            
+            navigate("/home")
             
           } catch (error) {
             console.log(error);
